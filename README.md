@@ -58,7 +58,7 @@ dependencies:
 <manifest>
     <application>
         <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
+            android:name="com.naver.maps.map.NCP_KEY_ID"
             android:value="YOUR_CLIENT_ID_HERE" />
     </application>
 </manifest>
