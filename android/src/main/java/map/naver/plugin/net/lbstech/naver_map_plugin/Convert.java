@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.flutter.view.FlutterMain;
-
 @SuppressWarnings("rawtypes")
 class Convert {
 
@@ -162,8 +160,9 @@ class Convert {
 
     static OverlayImage toOverlayImage(Object o) {
         String assetName = (String) o;
-        String key = FlutterMain.getLookupKeyForAsset(assetName);
-        return OverlayImage.fromAsset(key);
+        // FlutterMain.getLookupKeyForAsset is deprecated and removed in Flutter 2.0+
+        // Assets can now be accessed directly by their name
+        return OverlayImage.fromAsset(assetName);
     }
 
     static List<LatLng> toCoords(Object o) {

@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** NaverMapPlugin */
 public class NaverMapPlugin implements FlutterPlugin, Application.ActivityLifecycleCallbacks,
@@ -35,27 +34,6 @@ public class NaverMapPlugin implements FlutterPlugin, Application.ActivityLifecy
 
   private NaverMapPlugin(Activity activity) {
     this.registrarActivityHashCode = activity.hashCode();
-  }
-
-  // 플러그인 등록 (Legacy)
-  public static void registerWith(Registrar registrar) {
-    if(registrar.activity() == null){
-      // 백그라운드에서 플러그인을 등록하려고 시도할때 엑티비티는 존재하지 않습니다.
-      // 이 플러그인이 포어그라운드에서만 돌아가기 때문에 백그라운드에서 등록하는 것을 막습니다.
-      return;
-    }
-    NaverMapPlugin plugin = new NaverMapPlugin(registrar.activity());
-    registrar.activity().getApplication().registerActivityLifecycleCallbacks(plugin);
-    // 라이프사이클 콜백
-    registrar
-            .platformViewRegistry()
-            .registerViewFactory(
-                    "naver_map_plugin",
-                    new NaverMapFactory(
-                            plugin.state,
-                            registrar.messenger(),
-                            registrar.activity()
-                    ));
   }
 
   @Override
